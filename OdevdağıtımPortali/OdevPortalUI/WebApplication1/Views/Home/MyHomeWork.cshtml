@@ -1,0 +1,39 @@
+﻿@using WebApplication1.Models
+@model List<OdevModel>
+@{
+    ViewData["Title"] = "MyHomeWork";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Ders Adı</th>
+                            <th>Ödev Adı</th>
+                            <th>Ödev Konusu</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.dersAdi</td>
+                                <td>@item.odevAdi</td>
+                                <td>@item.odevKonusu</td>
+                               
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
+    </div>
+</div>
+

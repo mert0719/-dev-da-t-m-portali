@@ -1,0 +1,147 @@
+﻿@using WebApplication1.Models
+@model List<OdevModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-7">
+            <div class="table-responsive">
+                <input type="hidden" value="@ViewBag.userId" id="userId" />
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Ders Adı</th>
+                            <th>Ödev Adı</th>
+                            <th>Ödev Konusu</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.dersAdi</td>
+                                <td>@item.odevAdi</td>
+                                <td>@item.odevKonusu</td>
+                                @if(ViewBag.role == "Ogretmen")
+                                {
+                                    <td>
+                                        <a href="#" data-id="@item.id" type="button" class="btn btn-danger btn-sm sil">Sil</a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <a href="#" data-id="@item.id" type="button" class="btn btn-success btn-sm odev">Ödev al</a>
+                                    </td>
+                                }
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @if (ViewBag.role == "Ogretmen")
+        {
+            <div class="col-5">
+                <form>
+                    <input type="hidden" value="@ViewBag.jwt" id="jwt" />
+                    <input type="hidden" value="@ViewBag.userId" id="userId" />
+                    <h3>Yeni ödev ekle</h3>
+                    <div class="form-group mb-3">
+                        <label>Ders Seç</label>
+                        <select class="form-control dersId" name="dersId" id="dersId"></select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Ödev adı</label>
+                        <input class="form-control" name="odevAdi" id="odevAdi" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Ödev konusu</label>
+                        <input class="form-control" name="odevKonusu" id="odevKonusu" />
+                    </div>
+                    <button type="button" class="btn btn-primary kayit">Yeni ekle</button>
+                </form>
+            </div>
+        }
+        
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        var jwt = $("#jwt").val();
+        var userId = $("#userId").val();
+        $.ajax({
+            type: 'GET',
+            url: 'https://localhost:7295/api/Dersler',
+            headers: {
+                'Authorization': 'Bearer ' + jwt
+            },
+            success: function (res) {
+                console.log(res);
+                let selectElement = $('select[name="dersId"]');
+                for (let i = 0; i < res.length; i++) {
+
+                    let id = res[i].id;
+                    let dersAdi = res[i].dersAdi;
+                    let optionElement = $('<option></option>').attr('value', id).text(dersAdi);
+                    selectElement.append(optionElement);
+                }
+
+            }
+        })
+
+        $(".kayit").click(function (e) {
+            e.preventDefault();
+            var dataForm = {
+                dersId: $(".dersId").val(),
+                odevAdi: $("#odevAdi").val(),
+                odevKonusu: $("#odevKonusu").val()
+            };
+            $.ajax({
+                type:'POST',
+                url: 'https://localhost:7295/api/Odevler',
+                contentType:'application/json',
+                data:JSON.stringify(dataForm),
+                success: function (res) {
+                    alert("Yeni ödev eklendi")
+                    window.location.reload();
+                }
+            })
+        })
+
+        $(".sil").click(function (e) {
+            e.preventDefault();
+            var id = $(this).attr("data-id");
+             
+            $.ajax({
+                type:'DELETE',
+                url: 'https://localhost:7295/api/Odevler?id=' + id,
+                success:function(res){
+                    alert("Ödev silindi")
+                    window.location.reload();
+                }
+            })
+        })
+
+        $(".odev").click(function (e) {
+            e.preventDefault();
+            var id = $(this).attr("data-id");
+            $.ajax({
+                type:'PUT',
+                url: 'https://localhost:7295/api/Odevler/GetHomeWork?id=' + userId + '&odevId=' +  id,
+                success: function (res) {
+                    alert("Ödev alındı")
+                    window.location.reload();
+                }
+            })
+        })
+
+    })
+</script>

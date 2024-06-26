@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OdevPortal", "OdevPortal\OdevPortal.csproj", "{BC8DDC00-7027-42FB-821A-32572109D899}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "..\OdevPortalUI\WebApplication1\WebApplication1.csproj", "{CF5E27D5-ADDC-4B8E-A816-81EE3F3E6CF5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC8DDC00-7027-42FB-821A-32572109D899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC8DDC00-7027-42FB-821A-32572109D899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC8DDC00-7027-42FB-821A-32572109D899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC8DDC00-7027-42FB-821A-32572109D899}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF5E27D5-ADDC-4B8E-A816-81EE3F3E6CF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF5E27D5-ADDC-4B8E-A816-81EE3F3E6CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF5E27D5-ADDC-4B8E-A816-81EE3F3E6CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF5E27D5-ADDC-4B8E-A816-81EE3F3E6CF5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {707F1776-8E15-414F-A489-F79649E773DD}
+	EndGlobalSection
+EndGlobal
